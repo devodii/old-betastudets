@@ -2,15 +2,13 @@
 
 export async function getCourses() {
   try {
-    const response = await fetch('http://localhost:3000/api/courses', {
+    const response = await fetch(`${process.env.NEXT_API_URL}/courses`, {
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
     const courses = await response.json();
-
-    console.log({ courses });
 
     return courses;
   } catch (error) {
