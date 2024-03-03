@@ -4,15 +4,18 @@ import { SecurityService } from './security.service';
 import { SecurityDto } from './dto/security.dto';
 
 @Controller('auth')
-export class AuthController {
+export class SecurityController {
   constructor(private securityService: SecurityService) {}
 
-  private logger = new Logger(AuthController.name);
+  private logger = new Logger(SecurityController.name);
 
   @Get('whoAmI')
   whoAmI(@Session() session: Record<string, any>) {
     this.logger.log('getting current user');
-    return session?.user ? session.user : null;
+
+    const currentUser = session?.user ? session?.user : {};
+    console.log({ session });
+    return currentUser;
   }
 
   @Post('signIn')
@@ -20,13 +23,13 @@ export class AuthController {
     @Body() dto: SecurityDto,
     @Session() session: Record<string, unknown>
   ) {
-    this.logger.log('attempt to sign in', dto);
     const user = await this.securityService.signIn(dto);
 
-    if (user.status) {
-      session.user = user?.content;
+    if (user.email) {
+      console.log('storing a user!');
+      session.user = user.email;
     }
 
-    return user;
+    return { email: user.email };
   }
 }

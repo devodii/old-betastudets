@@ -25,8 +25,9 @@ export default function SignInPage() {
     console.log({ data });
 
     // todo: add type for data
-    if (data.status) {
-      navigate('/');
+    if (data.email) {
+      console.log('authed');
+      // navigate('/');
     } else {
       // todo: emit toast
       alert(data.message);

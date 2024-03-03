@@ -11,11 +11,12 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
       // expects an email
       const { data: user } = await axiosInstance.get('/api/auth/whoAmI');
 
-      if (!user?.id && pathname.includes('/')) {
+      console.log({ user });
+      if (!user?.email && pathname === '/') {
         navigate('/sign-in');
       }
 
-      if (user?.id && pathname.includes('/sign-in')) {
+      if (user?.email && pathname.includes('/sign-in')) {
         navigate('/');
       }
     }

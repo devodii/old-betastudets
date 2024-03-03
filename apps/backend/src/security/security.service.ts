@@ -9,7 +9,7 @@ export class SecurityService {
 
   async signIn(dto: SecurityDto) {
     const user = this.courseReps.find(({ email }) => email === dto?.email);
-    if (dto?.password != user?.password) {
+    if (!user || dto?.password !== user.password) {
       throw new HttpException(
         'INCORRECT PASSWORD',
         HttpStatus.NON_AUTHORITATIVE_INFORMATION
@@ -18,6 +18,6 @@ export class SecurityService {
 
     console.log({ user });
 
-    return user ? { status: true, content: user } : null;
+    return user;
   }
 }

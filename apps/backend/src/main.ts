@@ -1,4 +1,4 @@
-import session from 'express-session';
+import * as session from 'express-session';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
@@ -10,9 +10,10 @@ async function bootstrap() {
   app.enableCors();
 
   app.use(
-    session({
+    session.default({
       secret: 'randKey123',
       resave: false,
+      name: 'session.id',
       cookie: {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 3, // 3 days
