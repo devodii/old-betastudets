@@ -9,14 +9,14 @@ import {
   Patch,
   Post,
   UseGuards,
-} from "@nestjs/common";
-import { CoursesService, type ID } from "./courses.service";
-import { CreateCourseDto, UpdateCourseDto } from "./dtos";
-import { Roles } from "../users/decorators/roles.decorator";
-import { UserRoleEnum } from "@betastudents/enums";
-import { RolesGuard } from "./guards/roles.guard";
+} from '@nestjs/common';
+import { CoursesService, type ID } from './courses.service';
+import { CreateCourseDto, UpdateCourseDto } from './dtos';
+import { Roles } from '../users/decorators/roles.decorator';
+import { UserRoleEnum } from '@betastudents/enums';
+import { RolesGuard } from './guards/roles.guard';
 
-@Controller("courses")
+@Controller('courses')
 export class CoursesController {
   constructor(private coursesService: CoursesService) {}
 
@@ -27,10 +27,10 @@ export class CoursesController {
     return await this.coursesService.findAll();
   }
 
-  @Get(":key")
-  async findOneCourse(@Param("key") key: string) {
-    this.logger.log("getting course by key");
-    return await this.coursesService.find(key);
+  @Get(':id')
+  async findOneCourse(@Param('id') id: string) {
+    this.logger.log('getting course by id');
+    return await this.coursesService.find(Number(id));
   }
 
   @Post()
@@ -40,16 +40,16 @@ export class CoursesController {
     return await this.coursesService.create(dto);
   }
 
-  @Patch(":id")
+  @Patch(':id')
   async updateCourse(
-    @Param("id", ParseIntPipe) id: ID,
+    @Param('id', ParseIntPipe) id: ID,
     @Body() dto: UpdateCourseDto
   ) {
     return await this.coursesService.update(id, dto);
   }
 
-  @Delete(":id")
-  async removeCourse(@Param("id", ParseIntPipe) id: ID) {
+  @Delete(':id')
+  async removeCourse(@Param('id', ParseIntPipe) id: ID) {
     return await this.coursesService.delete(id);
   }
 }

@@ -1,9 +1,9 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Course } from "./entities/courses.entity";
-import { Repository } from "typeorm";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Course } from './entities/courses.entity';
+import { Repository } from 'typeorm';
 
-export type ID = Course["id"];
+export type ID = Course['id'];
 @Injectable()
 export class CoursesService {
   constructor(@InjectRepository(Course) private repo: Repository<Course>) {}
@@ -13,11 +13,11 @@ export class CoursesService {
     return await this.repo.save(course);
   }
 
-  async find(key: string) {
-    const course = await this.repo.findOne({ where: { key } });
+  async find(id: number) {
+    const course = await this.repo.findOne({ where: { id } });
 
     if (!course.id) {
-      throw new Error("course not found");
+      throw new Error('course not found');
     }
 
     return course;

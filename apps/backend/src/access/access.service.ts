@@ -1,30 +1,21 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { UsersService } from "../users/users.service";
-import { SignUpDto, SignInDto } from "./dto";
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { SignInDto } from './dto';
 
 @Injectable()
 export class AccessService {
-  constructor(private usersService: UsersService) {}
+  private courseReps = [
+    { email: 'emmanuelodii80@gmail.com', password: '1234' },
+  ];
 
   async signIn(dto: SignInDto) {
-    const user = await this.usersService.findOne(dto.email);
+    const user = this.courseReps.find(({ email }) => email === dto.email);
     if (dto.password !== user?.password) {
       throw new HttpException(
-        "INCORRECT PASSWORD",
+        'INCORRECT PASSWORD',
         HttpStatus.NON_AUTHORITATIVE_INFORMATION
       );
     }
 
     return { status: true, content: user };
-  }
-
-  async signUp(dto: SignUpDto) {
-    try {
-      const user = await this.usersService.create(dto.email, dto.password);
-      return { status: true, object: "user.created", content: user };
-    } catch (error) {
-      console.error(error);
-      return { status: false };
-    }
   }
 }
