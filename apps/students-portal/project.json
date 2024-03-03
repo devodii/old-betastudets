@@ -1,8 +1,0 @@
-{
-  "name": "students-portal",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/students-portal",
-  "projectType": "application",
-  "targets": {},
-  "tags": []
-}
