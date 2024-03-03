@@ -1,15 +1,15 @@
-import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 
-import { AccessModule } from "../access/access.module";
-import { CoursesModule } from "../courses/courses.module";
-import { DatabaseModule } from "../database/database.module";
-import { UsersModule } from "../users/users.module";
-import { AppService } from "./app.service";
+import { CoursesModule } from '../courses/courses.module';
+import { DatabaseModule } from '../database/database.module';
+import { UsersModule } from '../users/users.module';
+import { AppService } from './app.service';
+import { SecurityModule } from '../security/security.module';
 
 @Module({
   imports: [
-    AccessModule,
+    SecurityModule,
     DatabaseModule,
     CoursesModule,
     ConfigModule.forRoot({ isGlobal: true }),
