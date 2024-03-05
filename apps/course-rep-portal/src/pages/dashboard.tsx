@@ -22,7 +22,10 @@ export default function DashboardPage() {
       <div className="flex flex-col gap-4">
         <h2 className="text-3xl font-semibold">Welcome, {user.email}</h2>
         <div className="flex items-center gap-4">
-          <Link to="new" className="max-w-max underline underline-offset-2">
+          <Link
+            to="/dashboard/create-course"
+            className="max-w-max underline underline-offset-2"
+          >
             Post a course
           </Link>
           <Link

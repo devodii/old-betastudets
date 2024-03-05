@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import { Wrapper } from './components/wrapper';
 import { Provider } from './providers/store';
 
 const DashboardPage = React.lazy(() => import('./pages/dashboard'));
 const SignInPage = React.lazy(() => import('./pages/sign-in'));
+const CreateCoursePage = React.lazy(() => import('./pages/create-course'));
 
 export function App() {
   return (
@@ -13,7 +14,10 @@ export function App() {
         <React.Suspense fallback={<Wrapper>Loading...</Wrapper>}>
           <Routes>
             <Route path="/sign-in" element={<SignInPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/dashboard" element={<Outlet />}>
+              <Route index element={<DashboardPage />} />
+              <Route path="create-course" element={<CreateCoursePage />} />
+            </Route>
           </Routes>
         </React.Suspense>
       </Provider>

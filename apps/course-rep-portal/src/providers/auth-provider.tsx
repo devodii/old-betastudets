@@ -12,7 +12,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
         '/api/course-rep/auth/whoAmI'
       );
 
-      if (!user?.email && pathname === '/') {
+      if (!user?.email && !['/sign-in'].includes(pathname)) {
         navigate('/sign-in');
       }
 

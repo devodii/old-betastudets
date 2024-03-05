@@ -8,6 +8,6 @@ export class CourseRepGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = ctx.switchToHttp().getRequest();
 
-    return !!request.courseRep;
+    return !!request.session.courseRep;
   }
 }

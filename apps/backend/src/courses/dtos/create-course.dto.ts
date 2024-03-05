@@ -1,10 +1,7 @@
-import { IsNotEmpty, IsString } from "class-validator";
-import { Course } from "../entities/courses.entity";
+import { IsNotEmpty, IsString } from 'class-validator';
+import { Course } from '../entities/courses.entity';
 
 export class CreateCourseDto implements Partial<Course> {
-  @IsString()
-  key?: string;
-
   @IsString()
   @IsNotEmpty()
   nameWithCode?: string;

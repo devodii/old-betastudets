@@ -8,7 +8,6 @@ export class CourseRepsService {
   // todo: connect to entity.
 
   async signIn(dto: CourseRepAuthDto) {
-    console.log({ dto });
     const user = this.courseReps.find(({ email }) => email === dto?.email);
     if (!user || dto?.password !== user.password) {
       throw new HttpException(

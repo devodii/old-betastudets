@@ -1,12 +1,9 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Course {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @PrimaryColumn({ type: 'varchar', nullable: false, unique: true })
-  key: string;
 
   @Column({ type: 'varchar', nullable: false })
   instructor: string;

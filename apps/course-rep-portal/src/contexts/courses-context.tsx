@@ -34,6 +34,8 @@ const initialState = {
     isCreating: false,
     created: false,
   },
+
+  courseId: null,
 };
 
 function reducer(state: typeof initialState, action: ActionType<ICases>) {
@@ -56,7 +58,11 @@ function reducer(state: typeof initialState, action: ActionType<ICases>) {
       return { ...state, status: { isCreating: true } };
 
     case 'course.created':
-      return { ...state, status: { created: true, isCreating: false } };
+      return {
+        ...state,
+        status: { created: true, isCreating: false },
+        courseId: payload,
+      };
 
     case 'reset':
       return initialState;
