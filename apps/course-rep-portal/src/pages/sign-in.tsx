@@ -17,7 +17,7 @@ export default function SignInPage() {
 
     if (!email || !password) return;
 
-    const { data } = await axiosInstance.post(`/api/auth/signin`, {
+    const { data } = await axiosInstance.post(`/api/course-rep/auth/signin`, {
       email,
       password,
     });

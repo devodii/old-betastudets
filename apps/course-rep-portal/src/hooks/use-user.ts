@@ -5,7 +5,7 @@ export function useUser() {
   return useQuery({
     queryKey: ['user'],
     queryFn: async () => {
-      const { data } = await axiosInstance.get('/api/auth/whoAmI');
+      const { data } = await axiosInstance.get('/api/course-rep/auth/whoAmI');
       return data;
     },
   });

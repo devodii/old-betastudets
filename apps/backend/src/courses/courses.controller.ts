@@ -11,11 +11,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CoursesService, type ID } from './courses.service';
-import { CreateCourseDto, UpdateCourseDto } from './dtos';
-import { Roles } from '../users/decorators/roles.decorator';
-import { UserRoleEnum } from '@betastudents/enums';
-import { RolesGuard } from './guards/roles.guard';
-
+import { CreateCourseDto } from './dtos/create-course.dto';
+import { UpdateCourseDto } from './dtos/update-course.dto';
+import { CourseRepGuard } from '../course-reps/guards/course-rep.guard';
 @Controller('courses')
 export class CoursesController {
   constructor(private coursesService: CoursesService) {}
@@ -34,8 +32,7 @@ export class CoursesController {
   }
 
   @Post()
-  @UseGuards(RolesGuard)
-  @Roles(UserRoleEnum.COURSE_REP)
+  @UseGuards(CourseRepGuard)
   async createCourse(@Body() dto: CreateCourseDto) {
     return await this.coursesService.create(dto);
   }
