@@ -7,7 +7,7 @@ interface Props {
   };
 }
 
-export const convertISOToDay = (dateString: string) => {
+const convertISOToDay = (dateString: string) => {
   const date = new Date(dateString);
   const formattedDate = date.toLocaleDateString('en-US', {
     month: 'short',
@@ -21,7 +21,6 @@ export const convertISOToDay = (dateString: string) => {
 export default async function CoursePage({ params }: Props) {
   const course = await getCourse(params.id);
 
-  console.log({ course });
   return (
     <Wrapper>
       <div className="flex flex-col gap-2 mt-8">
