@@ -2,10 +2,12 @@ import * as React from 'react';
 import Link from 'next/link';
 import { CourseCard } from './course-card';
 import { Wrapper } from '../../components/wrapper';
+import { type Course } from '@betastudents/types';
 
 interface Props {
-  courses: any[];
+  courses: Course[];
 }
+
 export const CoursesDisplay = ({ courses }: Props) => {
   return (
     <Wrapper>
@@ -15,8 +17,8 @@ export const CoursesDisplay = ({ courses }: Props) => {
 
       {courses?.length > 0 ? (
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {courses?.map((course: any) => (
-            <Link href={course.key} key={course.id}>
+          {courses?.map((course) => (
+            <Link href={`/courses/${course.id}`} key={course.id}>
               <CourseCard {...course} />
             </Link>
           ))}
