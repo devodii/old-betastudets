@@ -30,7 +30,7 @@ export class CoursesService {
   async update(id: ID, attrs: Partial<Course>) {
     return await this.repo.update(id, attrs);
   }
-
+ 
   async delete(id: ID) {
     const course = await this.repo.find({ where: { id } });
     return await this.repo.remove(course);

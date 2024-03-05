@@ -8,16 +8,16 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
 
   React.useEffect(() => {
     async function fetchWhoAmI() {
-      // expects an email
-      const { data: user } = await axiosInstance.get('/api/course-rep/auth/whoAmI');
+      const { data: user } = await axiosInstance.get(
+        '/api/course-rep/auth/whoAmI'
+      );
 
-      console.log({ user });
       if (!user?.email && pathname === '/') {
         navigate('/sign-in');
       }
 
-      if (user?.email && pathname.includes('/sign-in')) {
-        navigate('/');
+      if (user?.email && ['/sign-in', '/'].includes(pathname)) {
+        navigate('/dashboard');
       }
     }
 

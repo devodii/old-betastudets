@@ -5,8 +5,6 @@ import { useUser } from '../hooks/use-user';
 export default function DashboardPage() {
   const { data: user, isLoading, isError } = useUser();
 
-  console.log({ user });
-
   if (isLoading) {
     return <Wrapper>Loading user...</Wrapper>;
   }
@@ -15,8 +13,8 @@ export default function DashboardPage() {
     return <Wrapper>User not found</Wrapper>;
   }
 
-  if (!user?.id) {
-    return <Navigate to="sign-in" />;
+  if (!user?.email) {
+    return <Navigate to="/sign-in" />;
   }
 
   return (

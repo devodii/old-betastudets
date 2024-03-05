@@ -12,8 +12,8 @@ export function App() {
       <Provider>
         <React.Suspense fallback={<Wrapper>Loading...</Wrapper>}>
           <Routes>
-            <Route path="/" element={<DashboardPage />} />
             <Route path="/sign-in" element={<SignInPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
           </Routes>
         </React.Suspense>
       </Provider>

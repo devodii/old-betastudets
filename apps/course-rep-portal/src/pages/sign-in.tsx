@@ -17,17 +17,21 @@ export default function SignInPage() {
 
     if (!email || !password) return;
 
-    const { data } = await axiosInstance.post(`/api/course-rep/auth/signin`, {
-      email,
-      password,
-    });
+    const { data } = await axiosInstance.post(
+      `/api/course-rep/auth/signin`,
+      {
+        email,
+        password,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
-    console.log({ data });
-
-    // todo: add type for data
-    if (data.email) {
-      console.log('authed');
-      // navigate('/');
+    if (data.status) {
+      navigate('/dashboard');
     } else {
       // todo: emit toast
       alert(data.message);
