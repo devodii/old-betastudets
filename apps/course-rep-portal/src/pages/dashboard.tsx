@@ -5,16 +5,16 @@ import { useUser } from '../hooks/use-user';
 export default function DashboardPage() {
   const { data: user, isLoading, isError } = useUser();
 
+  if (!user?.email) {
+    return <Navigate to="/sign-in" />;
+  }
+
   if (isLoading) {
     return <Wrapper>Loading user...</Wrapper>;
   }
 
   if (isError) {
     return <Wrapper>User not found</Wrapper>;
-  }
-
-  if (!user?.email) {
-    return <Navigate to="/sign-in" />;
   }
 
   return (
