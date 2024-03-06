@@ -8,7 +8,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: ['http://localhost:4200', 'https://betastudents.com'],
+    origin: [
+      'http://localhost:4200',
+      'https://betastudents.com',
+      'https://admin.betastudents.com',
+    ],
     credentials: true,
   });
 

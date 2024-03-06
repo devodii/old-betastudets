@@ -1,6 +1,7 @@
+import { Course } from '@betastudents/types';
 import * as React from 'react';
 
-export function CourseCard({ instructor, nameWithCode, venue }: any) {
+export function CourseCard({ instructor, nameWithCode, venue }: Course) {
   return (
     <div className="w-full border rounded-md py-4 px-8 flex flex-col gap-2">
       <h4 className="text-3xl font-semibold">{nameWithCode}</h4>
