@@ -13,6 +13,14 @@ export function Header() {
               courses
             </Link>
           </li>
+          <li>
+            <Link
+              href={'/course-outline'}
+              className="underline underline-offset-2"
+            >
+              courses outline
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

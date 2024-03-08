@@ -10,8 +10,8 @@ export function Hero() {
         courses, so that they learn responsively ❤️
       </p>
 
-      <div className="flex items-center gap-2 mt-4">
-        <p>Don&apos;t know where to start?</p>
+      <div className="flex items-center gap-2 mt-12">
+        <p className="text-md">Don&apos;t know where to start?</p>
 
         <Link href="courses" className="underline underline-offset-2">
           Explore today courses
