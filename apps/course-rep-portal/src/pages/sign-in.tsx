@@ -4,7 +4,7 @@ import { Button, Input, Label } from '../components/ui';
 import { Wrapper } from '../components/wrapper';
 
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../services/axios-instance';
+import api from '../services/axios-instance';
 
 export default function SignInPage() {
   const [email, setEmail] = React.useState('');
@@ -17,7 +17,7 @@ export default function SignInPage() {
 
     if (!email || !password) return;
 
-    const { data } = await axiosInstance.post(
+    const { data } = await api.post(
       `/api/course-rep/auth/signin`,
       {
         email,

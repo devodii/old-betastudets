@@ -27,7 +27,6 @@ export class CoursesController {
 
   @Get(':id')
   async findOneCourse(@Param('id') id: string) {
-    this.logger.log('getting course by id');
     return await this.coursesService.find(Number(id));
   }
 

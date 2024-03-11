@@ -3,12 +3,12 @@
 import { Course, FormEvent } from '@betastudents/types';
 import { Button, Input, Label, Textarea } from '../../components/ui';
 import { useCourses } from '../../contexts/courses-context';
-import axiosInstance from '../../services/axios-instance';
+import api from '../../services/axios-instance';
 import { ShareCourseModal } from './share-course';
 import { Wrapper } from '../../components/wrapper';
 
 async function handleCreate(props: Partial<Course>) {
-  const { data } = await axiosInstance.post('/api/courses', { ...props });
+  const { data } = await api.post('/api/courses', { ...props });
   return data;
 }
 

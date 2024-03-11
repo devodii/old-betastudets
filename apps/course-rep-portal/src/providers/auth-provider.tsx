@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axiosInstance from '../services/axios-instance';
+import api from '../services/axios-instance';
 
 export function AuthProvider({ children }: React.PropsWithChildren) {
   const navigate = useNavigate();
@@ -8,9 +8,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
 
   React.useEffect(() => {
     async function fetchWhoAmI() {
-      const { data: user } = await axiosInstance.get(
-        '/api/course-rep/auth/whoAmI'
-      );
+      const { data: user } = await api.get('/api/course-rep/auth/whoAmI');
 
       if (!user?.email && !['/sign-in'].includes(pathname)) {
         navigate('/sign-in');
