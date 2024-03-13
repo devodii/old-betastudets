@@ -18,7 +18,8 @@
     "paths": {
       "@betastudents/analytics": ["libs/analytics/src/index.ts"],
       "@betastudents/enums": ["libs/enums/src/index.ts"],
-      "@betastudents/types": ["libs/types/src/index.ts"]
+      "@betastudents/types": ["libs/types/src/index.ts"],
+      "@betastudents/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

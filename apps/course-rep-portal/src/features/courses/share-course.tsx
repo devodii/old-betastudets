@@ -13,7 +13,7 @@ import {
   Input,
   Label,
   Button,
-} from '../../components/ui';
+} from '@betastudents/ui';
 import { useNavigate } from 'react-router-dom';
 import { useCourses } from '../../contexts/courses-context';
 

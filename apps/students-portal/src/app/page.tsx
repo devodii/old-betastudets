@@ -1,6 +1,6 @@
-import { Hero } from '../components/hero';
-import { Header } from '../components/header';
 import { Footer } from '../components/footer';
+import { Header } from '../components/header';
+import { Hero } from '../components/hero';
 
 export default async function Index() {
   return (
