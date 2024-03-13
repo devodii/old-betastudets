@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Wrapper } from '../../components/wrapper';
+import { GoBack } from '../../components/back';
 
 interface Props {
   subject?: any;
@@ -81,9 +82,16 @@ const courseOutlines = {
 export const CourseOutlineDisplay = ({ subject }: Props) => {
   return (
     <Wrapper>
-      <h2 className="font-semibold text-4xl text-center mb-6">
-        {subject ? `Course outline for ${subject}` : 'Browse course outline'}
-      </h2>
+      <div className="flex items-center justify-center gap-2">
+        <div className="-mt-4">
+          <GoBack />
+        </div>
+
+        <h2 className="font-semibold text-4xl text-center mb-6">
+          {subject ? `Course outline for ${subject}` : 'Browse course outline'}
+        </h2>
+      </div>
+
       {subject ? (
         courseOutlines[subject as keyof typeof courseOutlines]?.map(
           ({ main, sub }, idx) => (
