@@ -6,7 +6,7 @@ interface Props {
 }
 
 const courseOutlines = {
-  'math-120': [
+  'Math-120': [
     {
       main: 'Functions of real variable',
       sub: ['graph of functions', 'limits an continuity of a function'],
@@ -29,6 +29,53 @@ const courseOutlines = {
       sub: ['maximum, minimum and point of differenciation'],
     },
   ],
+  'Math-101': [
+    {
+      main: 'Elementary notions of sets, intersection, components, venn diagram',
+      sub: [],
+    },
+    { main: 'Real Numbers, Integers, Rationals and Irrationals', sub: [] },
+    { main: 'Maping of a set, real functions and their compositions', sub: [] },
+    {
+      main: 'Quadratic functions, Cubic functions and their roots, Partial functions',
+      sub: [],
+    },
+    {
+      main: 'Equations with complex roots, complex numbers, geometric representation of complex numbers. DE Mowes theorem, series and sequence',
+      sub: [],
+    },
+    {
+      main: 'Principle of mathematical induction, Binomial theorem.',
+      sub: [],
+    },
+    {
+      main: 'Trignometric functions of angles, circular functions, addition theorem, double and half angles',
+      sub: [],
+    },
+  ],
+  Physics: [
+    {
+      main: 'Fundamental and derived units',
+      sub: [],
+    },
+    {
+      main: 'Fundamental quantities and derived quantities',
+      sub: [],
+    },
+    { main: 'Dimensions', sub: ['Dimensional Analysis'] },
+    {
+      main: 'Vector and Scalar quantities',
+      sub: [
+        'two vectors at right angle to each other ',
+        'vectors incline at an angle to each other',
+      ],
+    },
+    { main: 'Resultant vectors' },
+    {
+      main: 'Resolution of forces and parallel law of forces',
+      sub: ['word problems'],
+    },
+  ],
 };
 
 export const CourseOutlineDisplay = ({ subject }: Props) => {
@@ -44,9 +91,9 @@ export const CourseOutlineDisplay = ({ subject }: Props) => {
               key={idx}
               className="flex flex-col items-start w-full max-w-xl"
             >
-              <p className="text-lg">{main}</p>
+              <p className="text-lg">- {main}</p>
               <ul className="ml-8 mt-1">
-                {sub.map((el) => (
+                {sub?.map((el) => (
                   <li key={el} className="list-[lower-roman] last:mb-4">
                     {el}
                   </li>
@@ -57,12 +104,26 @@ export const CourseOutlineDisplay = ({ subject }: Props) => {
         )
       ) : (
         <ul>
-          <li>
+          <li className="flex flex-col gap-1">
             <Link
-              href={'/course-outline?subject=math-120'}
+              href={'/course-outline?subject=Math-120'}
               className="underline underline-offset-2 md:text-md"
             >
               Maths 120
+            </Link>
+
+            <Link
+              href={'/course-outline?subject=Math-101'}
+              className="underline underline-offset-2 md:text-md"
+            >
+              Maths 101
+            </Link>
+
+            <Link
+              href={'/course-outline?subject=Physics'}
+              className="underline underline-offset-2 md:text-md"
+            >
+              Physics
             </Link>
           </li>
         </ul>
