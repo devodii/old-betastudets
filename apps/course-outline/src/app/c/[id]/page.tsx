@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Wrapper } from '@betastudents/ui';
-import { getOutline } from '../../../actions';
+import { getOutline } from '../../../actions/outline';
 
 interface Props {
   params: {
