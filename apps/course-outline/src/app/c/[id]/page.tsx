@@ -1,21 +1,19 @@
-import * as React from 'react';
-
-import { Wrapper } from '@betastudents/ui';
-import { getOutline } from '../../../actions/outline';
+import { notFound } from 'next/navigation'
+import { getOutline } from '../../../actions/outline'
+import { ViewCourseOutline } from '../../../components/view-outline'
 
 interface Props {
   params: {
-    id: string;
-  };
+    id: string
+  }
 }
 
 export default async function CourseOutlinePage({ params }: Props) {
-  const outline = await getOutline(params.id);
+  const outline = await getOutline(params.id)
 
-  return (
-    <Wrapper>
-      Course outline page for {params.id}
-      <pre>{JSON.stringify(outline)}</pre>
-    </Wrapper>
-  );
+  console.log({ outline })
+
+  if (!outline) return notFound()
+
+  return <ViewCourseOutline content={outline} />
 }

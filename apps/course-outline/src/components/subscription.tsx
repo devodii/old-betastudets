@@ -12,7 +12,7 @@ export const Subscription = () => {
   React.useEffect(() => {
     const generateCheckoutUrl = async () => {
       const products = await lemonSqueezy.getProducts()
-      setUrl(products.data[0].attributes.buy_now_url)
+      setUrl(products.data[1].attributes.buy_now_url)
       console.log({ products })
     }
     generateCheckoutUrl()

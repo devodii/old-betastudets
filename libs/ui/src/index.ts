@@ -1,4 +1,3 @@
-import './styles/global.css'
 export * from './primitives/input'
 export * from './primitives/button'
 export * from './primitives/dialog'

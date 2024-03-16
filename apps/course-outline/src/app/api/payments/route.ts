@@ -8,6 +8,8 @@ async function processEvent(event: any) {
     data.status === 'paid' &&
     event.meta.event_name.startsWith('order_created')
   ) {
+
+    console.log({ data})
     const supabase = await createSupabaseServerClient()
     const { error } = await supabase.auth.updateUser({
       data: { isSubscribed: true },
@@ -23,6 +25,7 @@ async function processEvent(event: any) {
 }
 
 async function webhook(request: any) {
+  console.log("request came in.")
   const rawBody = await request.text()
 
   const secret = process.env.NEXT_PUBLIC_LEMON_SQUEEZY_SECRET!
