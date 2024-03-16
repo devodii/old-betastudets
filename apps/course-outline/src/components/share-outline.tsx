@@ -1,5 +1,5 @@
 'use client'
-import { CopyIcon } from '@radix-ui/react-icons'
+import { CopyIcon, CheckIcon } from '@radix-ui/react-icons'
 import * as React from 'react'
 
 import {
@@ -15,6 +15,7 @@ import {
   Input,
   Label,
 } from '@betastudents/ui'
+import { useCopy } from '../hooks/use-copy'
 
 interface Props {
   url: string
@@ -22,12 +23,14 @@ interface Props {
 }
 
 export function ShareCourseOutline({ url, children: trigger }: Props) {
+  const { isCopied, copy } = useCopy(url)
+
   return (
     <Dialog defaultOpen={true}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="sm:max-w-md bg-white">
         <DialogHeader>
-          <DialogTitle>Share link</DialogTitle>
+          <DialogTitle>Share outline link</DialogTitle>
           <DialogDescription>
             Anyone who has this link will be able to view this.
           </DialogDescription>
@@ -39,9 +42,18 @@ export function ShareCourseOutline({ url, children: trigger }: Props) {
             </Label>
             <Input id="link" defaultValue={url} readOnly />
           </div>
-          <Button type="submit" size="sm" className="px-3">
+          <Button
+            type="submit"
+            size="sm"
+            className="px-3"
+            onClick={() => copy(url)}
+          >
             <span className="sr-only">Copy</span>
-            <CopyIcon className="h-4 w-4" />
+            {isCopied ? (
+              <CheckIcon className="size-4" />
+            ) : (
+              <CopyIcon className="h-4 w-4" />
+            )}
           </Button>
         </div>
         <DialogFooter className="sm:justify-start">
