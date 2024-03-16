@@ -1,14 +1,43 @@
-import { Button, Input, Label, Wrapper } from '@betastudents/ui';
-import { signUp } from '../../actions/user';
-import Link from 'next/link';
+'use client'
+
+import * as React from 'react'
+import { Input, Label, Wrapper } from '@betastudents/ui'
+import Link from 'next/link'
+import { signUp } from '../../actions/user'
+import { SubmitButton } from '../submit-button'
+import { toast } from 'sonner'
+import { useFormState } from 'react-dom'
+
+const initialState = {
+  message: null,
+  randomizer: 0,
+}
 
 export const SignUp = () => {
+  const [state, formAction] = useFormState(signUp, initialState)
+
+  const showToast = () => {
+    if (state.message) {
+      toast(state.message, {
+        action: {
+          label: 'retry',
+          onClick: () => console.log('retrying...'),
+        },
+        position: 'top-right',
+      })
+    }
+  }
+
+  React.useEffect(() => {
+    showToast()
+  }, [state.message, state.randomizer])
+
   return (
     <Wrapper>
       <h2 className="font-semibold text-2xl md:text-3xl">Sign up</h2>
 
       <form
-        action={signUp}
+        action={formAction}
         className="w-full mx-auto flex flex-col gap-6 max-w-4xl"
       >
         <div className="space-y-2">
@@ -22,12 +51,7 @@ export const SignUp = () => {
         </div>
 
         <div className="flex items-center justify-end">
-          <Button
-            className="bg-blue-500 text-white font-semibold"
-            type="submit"
-          >
-            Sign up
-          </Button>
+          <SubmitButton text="Sign up" />
         </div>
       </form>
 
@@ -41,5 +65,5 @@ export const SignUp = () => {
         </Link>
       </div>
     </Wrapper>
-  );
-};
+  )
+}

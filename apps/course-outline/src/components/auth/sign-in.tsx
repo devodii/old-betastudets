@@ -1,13 +1,43 @@
-import { Button, Input, Label, Wrapper } from '@betastudents/ui';
-import { signIn } from '../../actions/user';
-import Link from 'next/link';
+'use client'
+
+import * as React from 'react'
+import { Input, Label, Wrapper } from '@betastudents/ui'
+import Link from 'next/link'
+import { useFormState } from 'react-dom'
+import { toast } from 'sonner'
+import { signIn } from '../../actions/user'
+import { SubmitButton } from '../submit-button'
+
+const initialState = {
+  message: null,
+  randomizer: 0,
+}
 
 export const SignIn = () => {
+  const [state, formAction] = useFormState(signIn, initialState)
+
+  const showToast = () => {
+    if (state.message) {
+      toast(state.message, {
+        description: 'Not sure you have an account? sign up',
+        action: {
+          label: 'retry',
+          onClick: () => console.log('retrying...'),
+        },
+        position: 'top-right',
+      })
+    }
+  }
+
+  React.useEffect(() => {
+    showToast()
+  }, [state.message, state.randomizer])
+
   return (
     <Wrapper>
       <h2 className="font-semibold text-2xl md:text-3xl">Sign in</h2>
       <form
-        action={signIn}
+        action={formAction}
         className="w-full max-w-4xl mx-auto flex flex-col gap-6"
       >
         <div className="space-y-2">
@@ -21,12 +51,7 @@ export const SignIn = () => {
         </div>
 
         <div className="flex items-center justify-end">
-          <Button
-            className="bg-blue-500 text-white font-semibold"
-            type="submit"
-          >
-            Sign in
-          </Button>
+          <SubmitButton text="Sign in" />
         </div>
       </form>
 
@@ -40,5 +65,5 @@ export const SignIn = () => {
         </Link>
       </div>
     </Wrapper>
-  );
-};
+  )
+}
