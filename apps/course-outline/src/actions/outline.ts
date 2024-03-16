@@ -7,6 +7,7 @@ import { ApiResponse } from '../types'
 import { revalidatePath } from 'next/cache'
 
 async function createOutline(
+  prevState: any,
   formdata: FormData
 ): Promise<ApiResponse | undefined> {
   const creator = formdata.get('name-of-creator')
@@ -37,6 +38,7 @@ async function createOutline(
   }
 
   const recordId = data?.[0].id
+
   if (recordId) {
     return { message: recordId, success: true }
   }

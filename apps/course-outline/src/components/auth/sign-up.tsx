@@ -1,12 +1,11 @@
 'use client'
 
-import * as React from 'react'
 import { Input, Label, Wrapper } from '@betastudents/ui'
 import Link from 'next/link'
+import { useFormState } from 'react-dom'
 import { signUp } from '../../actions/user'
 import { SubmitButton } from '../submit-button'
-import { toast } from 'sonner'
-import { useFormState } from 'react-dom'
+import { Toast } from '../toast'
 
 const initialState = {
   message: null,
@@ -19,22 +18,6 @@ export const SignUp = () => {
     signUp,
     initialState
   )
-
-  const showToast = () => {
-    if (!success) {
-      toast(message, {
-        action: {
-          label: 'retry',
-          onClick: () => console.log('retrying...'),
-        },
-        position: 'top-right',
-      })
-    }
-  }
-
-  React.useEffect(() => {
-    showToast()
-  }, [message, randomizer])
 
   return (
     <Wrapper>
@@ -68,6 +51,14 @@ export const SignUp = () => {
           sign in
         </Link>
       </div>
+
+      {!success && (
+        <Toast
+          message={message}
+          data={{ position: 'top-right' }}
+          key={randomizer}
+        />
+      )}
     </Wrapper>
   )
 }
