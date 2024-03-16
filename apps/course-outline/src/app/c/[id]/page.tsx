@@ -12,8 +12,6 @@ interface Props {
 export default async function CourseOutlinePage({ params }: Props) {
   const outline = await getOutline(params.id);
 
-  console.log({ outline });
-
   return (
     <Wrapper>
       Course outline page for {params.id}

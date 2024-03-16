@@ -8,3 +8,5 @@ export * from "./primitives/toast"
 
 
 export * from './wrapper/wrapper';
+
+export * from '../lib/utils'

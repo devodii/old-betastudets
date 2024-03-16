@@ -11,14 +11,18 @@ import { SubmitButton } from '../submit-button'
 const initialState = {
   message: null,
   randomizer: 0,
+  success: false,
 }
 
 export const SignIn = () => {
-  const [state, formAction] = useFormState(signIn, initialState)
+  const [{ success, randomizer, message }, formAction] = useFormState(
+    signIn,
+    initialState
+  )
 
   const showToast = () => {
-    if (state.message) {
-      toast(state.message, {
+    if (!success) {
+      toast(message, {
         description: 'Not sure you have an account? sign up',
         action: {
           label: 'retry',
@@ -31,7 +35,7 @@ export const SignIn = () => {
 
   React.useEffect(() => {
     showToast()
-  }, [state.message, state.randomizer])
+  }, [randomizer, success])
 
   return (
     <Wrapper>

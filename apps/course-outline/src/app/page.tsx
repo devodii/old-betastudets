@@ -1,5 +1,5 @@
-import { CreateCourseOutline } from '../components';
+import { CreateCourseOutline } from '../components'
 
 export default async function Index() {
-  return <CreateCourseOutline />;
+  return <CreateCourseOutline />
 }

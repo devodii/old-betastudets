@@ -7,7 +7,8 @@ export type CourseOutline = {
   outline: string
 }
 
-export type ApiErrorResponse = {
+export type ApiResponse = {
+  success: boolean
   message: string
-  randomizer: number
+  randomizer?: number
 }

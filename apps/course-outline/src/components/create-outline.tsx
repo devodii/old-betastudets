@@ -1,10 +1,11 @@
-import * as React from 'react';
-import { Wrapper, Input, Textarea, Button, Label } from '@betastudents/ui';
-import { createOutline } from '../actions/outline';
+import * as React from 'react'
+import { Wrapper, Input, Textarea, Button, Label } from '@betastudents/ui'
+import { createOutline } from '../actions/outline'
+import { SubmitButton } from './submit-button'
 
 const Row = ({ children }: React.PropsWithChildren) => {
-  return <div className="space-y-2">{children}</div>;
-};
+  return <div className="space-y-2">{children}</div>
+}
 
 export const CreateCourseOutline = () => {
   return (
@@ -32,10 +33,9 @@ export const CreateCourseOutline = () => {
           <Textarea rows={12} id="outline" required name="outline" />
         </Row>
 
-        <Button className="w-full self-end max-w-xs bg-blue-500 text-white font-semibold">
-          Generate
-        </Button>
+        <SubmitButton text="Generate" className='w-full self-end'/>
+
       </form>
     </Wrapper>
-  );
-};
+  )
+}

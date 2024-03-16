@@ -11,14 +11,18 @@ import { useFormState } from 'react-dom'
 const initialState = {
   message: null,
   randomizer: 0,
+  success: false,
 }
 
 export const SignUp = () => {
-  const [state, formAction] = useFormState(signUp, initialState)
+  const [{ message, randomizer, success }, formAction] = useFormState(
+    signUp,
+    initialState
+  )
 
   const showToast = () => {
-    if (state.message) {
-      toast(state.message, {
+    if (!success) {
+      toast(message, {
         action: {
           label: 'retry',
           onClick: () => console.log('retrying...'),
@@ -30,7 +34,7 @@ export const SignUp = () => {
 
   React.useEffect(() => {
     showToast()
-  }, [state.message, state.randomizer])
+  }, [message, randomizer])
 
   return (
     <Wrapper>

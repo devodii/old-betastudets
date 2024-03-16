@@ -2,7 +2,6 @@ import { NextRequest } from 'next/server';
 import { updateSession } from './middlewares/session-middleware';
 
 export async function middleware(req: NextRequest) {
-  console.log('middleware ran');
   await updateSession(req);
 }
 

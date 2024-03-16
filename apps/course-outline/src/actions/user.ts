@@ -4,11 +4,11 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { createClient } from '../lib/supabase/server'
-import { ApiErrorResponse } from '../types'
+import createSupabaseServerClient from '../lib/supabase/server'
+import { ApiResponse } from '../types'
 
 export const getUser = async () => {
-  const supabase = createClient()
+  const supabase = await createSupabaseServerClient()
 
   return supabase.auth.getUser()
 }
@@ -16,21 +16,23 @@ export const getUser = async () => {
 export const signIn = async (
   prevState: any,
   formdata: FormData
-): Promise<ApiErrorResponse> => {
+): Promise<ApiResponse> => {
   const email: any = formdata.get('email')
   const password: any = formdata.get('password')
 
-  const supabase = createClient()
+  const supabase = await createSupabaseServerClient()
 
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { error } = await supabase.auth.signInWithPassword({
     email,
     password,
   })
 
-  console.log({ data, error })
-
   if (error) {
-    return { message: error.message, randomizer: Math.random() * 4 }
+    return {
+      message: error.message,
+      randomizer: Math.random() * 4,
+      success: false,
+    }
   }
 
   revalidatePath('/', 'layout')
@@ -40,17 +42,21 @@ export const signIn = async (
 export const signUp = async (
   prevState: any,
   formdata: FormData
-): Promise<ApiErrorResponse> => {
+): Promise<ApiResponse> => {
   // sign up
   const email: any = formdata.get('email')
   const password: any = formdata.get('password')
 
-  const supabase = createClient()
+  const supabase = await createSupabaseServerClient()
 
   const { error } = await supabase.auth.signUp({ email, password })
 
   if (error) {
-    return { message: error.message, randomizer: Math.random() * 4 }
+    return {
+      message: error.message,
+      randomizer: Math.random() * 4,
+      success: false,
+    }
   }
 
   revalidatePath('/', 'layout')
