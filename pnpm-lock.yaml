@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@lemonsqueezy/lemonsqueezy.js':
+    specifier: ^1.2.5
+    version: 1.2.5
   '@nestjs/common':
     specifier: ^10.0.2
     version: 10.3.3(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.1)(rxjs@7.8.1)
@@ -2339,6 +2342,10 @@ packages:
   /@leichtgewicht/ip-codec@2.0.4:
     resolution: {integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==}
     dev: true
+
+  /@lemonsqueezy/lemonsqueezy.js@1.2.5:
+    resolution: {integrity: sha512-T2XjKf5wgJcnZyY9ohZWUmaetzf2qGg0WfSbTsA1Mc9ubU/1w9T4BqsZagyyaXZjZ09SyLjvunzzivX5ppuohA==}
+    dev: false
 
   /@lukeed/csprng@1.1.0:
     resolution: {integrity: sha512-Z7C/xXCiGWsg0KuKsHTKJxbWhpI3Vs5GwLfOean7MGyVFGqdRgBbAjOCh6u4bbjPc/8MJ2pZmK/0DLdCbivLDA==}

@@ -5,6 +5,7 @@ export * from './primitives/dialog'
 export * from './primitives/textarea'
 export * from './primitives/label'
 export * from './primitives/toast'
+export * from './primitives/skeleton'
 
 export * from './wrapper/wrapper'
 export * from './spoiler/spoiler'
