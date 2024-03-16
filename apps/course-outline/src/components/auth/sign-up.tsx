@@ -52,7 +52,7 @@ export const SignUp = () => {
         </Link>
       </div>
 
-      {!success && (
+      {!success && message && (
         <Toast
           message={message}
           data={{ position: 'top-right' }}

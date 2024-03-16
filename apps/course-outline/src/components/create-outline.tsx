@@ -59,7 +59,7 @@ export const CreateCourseOutline = () => {
         />
       )}
 
-      {!success && (
+      {!success && message && (
         <Toast
           message={message}
           key={randomizer}
