@@ -29,7 +29,7 @@ export const Subscription = () => {
             <Crown className="text-black" size={30} />
           </div>
 
-          <span className="text-semibold text-2xl">$10</span>
+          <span className="text-semibold text-2xl">$10/mo</span>
         </div>
 
         <ul className="grid grid-rows-1 gap-4 mt-6 mb-3">

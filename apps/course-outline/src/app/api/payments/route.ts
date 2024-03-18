@@ -1,16 +1,16 @@
 import { NextResponse } from 'next/server'
 import crypto from 'crypto'
-import createSupabaseServerClient from '../../../lib/supabase/server'
+import createSupabaseBrowserClient from '../../../lib/supabase/client'
 
 async function processEvent(event: any) {
   const data = event.data.attributes
   if (
-    data.status === 'paid' &&
-    event.meta.event_name.startsWith('order_created')
+    data.status === 'active' &&
+    event.meta.event_name.startsWith('subscription_created')
   ) {
 
-    console.log({ data})
-    const supabase = await createSupabaseServerClient()
+    console.log({ data })
+    const supabase = await createSupabaseBrowserClient()
     const { error } = await supabase.auth.updateUser({
       data: { isSubscribed: true },
     })
