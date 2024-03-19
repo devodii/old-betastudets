@@ -11,9 +11,7 @@ interface Props {
 export default async function CourseOutlinePage({ params }: Props) {
   const outline = await getOutline(params.id)
 
-  console.log({ outline })
-
   if (!outline) return notFound()
 
-  return <ViewCourseOutline content={outline} />
+  return <ViewCourseOutline outline={outline as any} />
 }

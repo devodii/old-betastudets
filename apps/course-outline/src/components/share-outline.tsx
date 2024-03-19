@@ -1,5 +1,7 @@
 'use client'
-import { CopyIcon, CheckIcon } from '@radix-ui/react-icons'
+
+import { CheckIcon, CopyIcon } from '@radix-ui/react-icons'
+import { useRouter } from 'next/navigation'
 import * as React from 'react'
 
 import {
@@ -25,8 +27,14 @@ interface Props {
 export function ShareCourseOutline({ url, children: trigger }: Props) {
   const { isCopied, copy } = useCopy(url)
 
+  const { replace } = useRouter()
+
+  const clearSearchParams = () => {
+    replace('/')
+  }
+
   return (
-    <Dialog defaultOpen={true}>
+    <Dialog defaultOpen={true} onOpenChange={clearSearchParams}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="sm:max-w-md bg-white">
         <DialogHeader>

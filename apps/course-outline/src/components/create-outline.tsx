@@ -3,6 +3,7 @@
 import { Input, Label, Textarea, Wrapper } from '@betastudents/ui'
 import { createOutline } from '../actions/outline'
 import { ShareCourseOutline, SubmitButton, Toast } from '.'
+import Link from 'next/link'
 
 const FormRow = ({ children }: React.PropsWithChildren) => {
   return <div className="space-y-2">{children}</div>
@@ -20,43 +21,55 @@ export const CreateCourseOutline = ({
   outlineId,
 }: Partial<CreateCourseOutlineProps>) => {
   return (
-    <Wrapper as="main">
-      <h2 className="text-3xl md:text-4xl font-semibold">
-        Generate course outline
-      </h2>
+    <div>
+      <header className="w-full mt-6 md:mt-12 flex justify-end pr-8">
+        <Link href={'/me'} className="underline underline-offset-4">
+          dashboard
+        </Link>
+      </header>
 
-      <form
-        className="w-full flex flex-col gap-8 max-w-4xl mt-12"
-        action={createOutline}
-      >
-        <FormRow>
-          <Label htmlFor="name-of-creator">Your Name</Label>
-          <Input name="name-of-creator" required placeholder="Emmanuel Odii" />
-        </FormRow>
+      <Wrapper as="main" className="items-center">
+        <h2 className="text-3xl md:text-4xl font-semibold">
+          Generate course outline
+        </h2>
 
-        <FormRow>
-          <Label htmlFor="title">Course Name/Title</Label>
-          <Input name="title" required placeholder="Physics" />
-        </FormRow>
+        <form
+          className="w-full flex flex-col gap-8 max-w-4xl mt-12"
+          action={createOutline}
+        >
+          <FormRow>
+            <Label htmlFor="name-of-creator">Your Name</Label>
+            <Input
+              name="name-of-creator"
+              required
+              placeholder="Emmanuel Odii"
+            />
+          </FormRow>
 
-        <FormRow>
-          <Label htmlFor="outline">Course Outline</Label>
-          <Textarea rows={12} id="outline" required name="outline" />
-        </FormRow>
+          <FormRow>
+            <Label htmlFor="title">Course Name/Title</Label>
+            <Input name="title" required placeholder="Physics" />
+          </FormRow>
 
-        <SubmitButton text="Generate" className="w-full self-end" />
-      </form>
+          <FormRow>
+            <Label htmlFor="outline">Course Outline</Label>
+            <Textarea rows={12} id="outline" required name="outline" />
+          </FormRow>
 
-      {success && (
-        <ShareCourseOutline url={`${location.origin}/c/${outlineId}`} />
-      )}
+          <SubmitButton text="Generate" className="w-full self-end" />
+        </form>
 
-      {error && (
-        <Toast
-          message={'An unexpected error occured'}
-          data={{ position: 'top-right', description: 'Please, try again.' }}
-        />
-      )}
-    </Wrapper>
+        {success && (
+          <ShareCourseOutline url={`${location.origin}/c/${outlineId}`} />
+        )}
+
+        {error && (
+          <Toast
+            message={'An unexpected error occured'}
+            data={{ position: 'top-right', description: 'Please, try again.' }}
+          />
+        )}
+      </Wrapper>
+    </div>
   )
 }

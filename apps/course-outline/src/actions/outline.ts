@@ -5,12 +5,10 @@ import { getUser } from './user'
 import createSupabaseServerClient from '../lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 
-async function createOutline(
-  formdata: FormData
-) {
-  const creator = formdata.get('name-of-creator')
-  const courseTitle = formdata.get('title')
-  const outline = formdata.get('outline')
+async function createOutline(formdata: FormData) {
+  const username = formdata.get('name-of-creator') as any
+  const subject = formdata.get('title') as any
+  const content = formdata.get('outline') as any
 
   const supabase = await createSupabaseServerClient()
 
@@ -20,39 +18,45 @@ async function createOutline(
     redirect('/sign-in')
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const { data, error } = await supabase
-    .from('course_outline')
-    .insert({ created_by: creator, title: courseTitle, outline })
+    .from('course_outlines')
+    .insert({ content, subject, username })
     .select() // creates a record, and return it.
 
   console.log({ data, error })
 
   if (error) {
-    redirect("/?error=true")
+    redirect('/?error=true')
   }
 
   const recordId = data?.[0].id
 
-  if (recordId) {
-    return { message: recordId, success: true }
-  }
   revalidatePath('/c')
-  redirect(`/c?success=true&id=${recordId}`)
+  redirect(`?success=true&id=${recordId}`)
 }
 
 async function getOutline(id: string) {
   const supabase = await createSupabaseServerClient()
 
   const { data } = await supabase
-    .from('course_outline')
+    .from('course_outlines')
     .select('*')
-    .eq('id', id)
+    .match({ id })
 
-  return data
+  return data?.[0] ?? {}
 }
 
-async function getOutlinesForUser(userId: string) {
-  // return getOutlines
+export async function getUserOutlines(userId: string) {
+  const supabase = await createSupabaseServerClient()
+
+  const { data } = await supabase
+    .from('course_outlines')
+    .select('*')
+    .match({ user_id: userId })
+
+  return data ?? []
 }
 
 export { createOutline, getOutline }
