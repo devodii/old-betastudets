@@ -1,29 +1,24 @@
 'use client'
 
 import { Input, Label, Textarea, Wrapper } from '@betastudents/ui'
-import { useFormState } from 'react-dom'
 import { createOutline } from '../actions/outline'
-import { ShareCourseOutline } from './share-outline'
-import { SubmitButton } from './submit-button'
+import { ShareCourseOutline, SubmitButton, Toast } from '.'
 
-import { Toast } from './toast'
-
-const initialState = {
-  message: null,
-  success: false,
-  randomizer: 0,
-}
-
-const Row = ({ children }: React.PropsWithChildren) => {
+const FormRow = ({ children }: React.PropsWithChildren) => {
   return <div className="space-y-2">{children}</div>
 }
 
-export const CreateCourseOutline = () => {
-  const [{ message, success, randomizer }, formAction] = useFormState(
-    createOutline,
-    initialState
-  )
+interface CreateCourseOutlineProps {
+  success: string
+  error: string
+  outlineId: string
+}
 
+export const CreateCourseOutline = ({
+  success,
+  error,
+  outlineId,
+}: Partial<CreateCourseOutlineProps>) => {
   return (
     <Wrapper as="main">
       <h2 className="text-3xl md:text-4xl font-semibold">
@@ -32,38 +27,34 @@ export const CreateCourseOutline = () => {
 
       <form
         className="w-full flex flex-col gap-8 max-w-4xl mt-12"
-        action={formAction}
+        action={createOutline}
       >
-        <Row>
+        <FormRow>
           <Label htmlFor="name-of-creator">Your Name</Label>
           <Input name="name-of-creator" required placeholder="Emmanuel Odii" />
-        </Row>
+        </FormRow>
 
-        <Row>
+        <FormRow>
           <Label htmlFor="title">Course Name/Title</Label>
           <Input name="title" required placeholder="Physics" />
-        </Row>
+        </FormRow>
 
-        <Row>
+        <FormRow>
           <Label htmlFor="outline">Course Outline</Label>
           <Textarea rows={12} id="outline" required name="outline" />
-        </Row>
+        </FormRow>
 
         <SubmitButton text="Generate" className="w-full self-end" />
       </form>
 
-      {success && message && (
-        <ShareCourseOutline
-          url={`${location.origin}/c/${message}`}
-          key={message}
-        />
+      {success && (
+        <ShareCourseOutline url={`${location.origin}/c/${outlineId}`} />
       )}
 
-      {!success && message && (
+      {error && (
         <Toast
-          message={message}
-          key={randomizer}
-          data={{ position: 'top-right' }}
+          message={'An unexpected error occured'}
+          data={{ position: 'top-right', description: 'Please, try again.' }}
         />
       )}
     </Wrapper>

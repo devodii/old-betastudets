@@ -3,13 +3,11 @@
 import { redirect } from 'next/navigation'
 import { getUser } from './user'
 import createSupabaseServerClient from '../lib/supabase/server'
-import { ApiResponse } from '../types'
 import { revalidatePath } from 'next/cache'
 
 async function createOutline(
-  prevState: any,
   formdata: FormData
-): Promise<ApiResponse | undefined> {
+) {
   const creator = formdata.get('name-of-creator')
   const courseTitle = formdata.get('title')
   const outline = formdata.get('outline')
@@ -29,12 +27,8 @@ async function createOutline(
 
   console.log({ data, error })
 
-  if (error?.message) {
-    return {
-      message: error.message,
-      randomizer: Math.random() * 4,
-      success: false,
-    }
+  if (error) {
+    redirect("/?error=true")
   }
 
   const recordId = data?.[0].id
@@ -43,7 +37,7 @@ async function createOutline(
     return { message: recordId, success: true }
   }
   revalidatePath('/c')
-  redirect('/c')
+  redirect(`/c?success=true&id=${recordId}`)
 }
 
 async function getOutline(id: string) {
@@ -55,6 +49,10 @@ async function getOutline(id: string) {
     .eq('id', id)
 
   return data
+}
+
+async function getOutlinesForUser(userId: string) {
+  // return getOutlines
 }
 
 export { createOutline, getOutline }
