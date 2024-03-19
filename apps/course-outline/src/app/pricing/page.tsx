@@ -1,4 +1,4 @@
-import { Subscription } from '../../components/subscription'
+import { Subscription } from '../../components'
 
 export default async function PricingPage() {
   return <Subscription />

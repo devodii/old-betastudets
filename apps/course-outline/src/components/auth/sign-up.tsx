@@ -2,29 +2,20 @@
 
 import { Input, Label, Wrapper } from '@betastudents/ui'
 import Link from 'next/link'
-import { useFormState } from 'react-dom'
+import { SubmitButton, Toast } from '..'
 import { signUp } from '../../actions/user'
-import { SubmitButton } from '../submit-button'
-import { Toast } from '../toast'
 
-const initialState = {
-  message: null,
-  randomizer: 0,
-  success: false,
+interface Props {
+  error?: string
 }
 
-export const SignUp = () => {
-  const [{ message, randomizer, success }, formAction] = useFormState(
-    signUp,
-    initialState
-  )
-
+export const SignUp = ({ error }: Props) => {
   return (
     <Wrapper>
       <h2 className="font-semibold text-2xl md:text-3xl">Sign up</h2>
 
       <form
-        action={formAction}
+        action={signUp}
         className="w-full mx-auto flex flex-col gap-6 max-w-4xl"
       >
         <div className="space-y-2">
@@ -52,11 +43,10 @@ export const SignUp = () => {
         </Link>
       </div>
 
-      {!success && message && (
+      {error && (
         <Toast
-          message={message}
+          message={'Something went wrong, please refresh'}
           data={{ position: 'top-right' }}
-          key={randomizer}
         />
       )}
     </Wrapper>

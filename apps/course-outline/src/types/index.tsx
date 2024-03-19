@@ -6,9 +6,3 @@ export type CourseOutline = {
   title: string
   outline: string
 }
-
-export type ApiResponse = {
-  success: boolean
-  message: string
-  randomizer?: number
-}

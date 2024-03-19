@@ -2,28 +2,22 @@
 
 import { Input, Label, Wrapper } from '@betastudents/ui'
 import Link from 'next/link'
-import { useFormState } from 'react-dom'
+import { useRouter } from 'next/navigation'
 import { signIn } from '../../actions/user'
-import { SubmitButton } from '../submit-button'
-import { Toast } from '../toast'
+import { SubmitButton, Toast } from '..'
 
-const initialState = {
-  message: null,
-  randomizer: 0,
-  success: false,
+interface Props {
+  error?: string
 }
 
-export const SignIn = () => {
-  const [{ success, randomizer, message }, formAction] = useFormState(
-    signIn,
-    initialState
-  )
+export const SignIn = ({ error }: Props) => {
+  const { push } = useRouter()
 
   return (
     <Wrapper>
       <h2 className="font-semibold text-2xl md:text-3xl">Sign in</h2>
       <form
-        action={formAction}
+        action={signIn}
         className="w-full max-w-4xl mx-auto flex flex-col gap-6"
       >
         <div className="space-y-2">
@@ -51,11 +45,17 @@ export const SignIn = () => {
         </Link>
       </div>
 
-      {!success && message && (
+      {error && (
         <Toast
-          message={message}
-          data={{ position: 'top-right' }}
-          key={randomizer}
+          message={'Invalid credentials'}
+          data={{
+            position: 'top-right',
+            description: 'Not sure you have an account?',
+            action: {
+              label: 'signup',
+              onClick: () => push('/sign-up'),
+            },
+          }}
         />
       )}
     </Wrapper>

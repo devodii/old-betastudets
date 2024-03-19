@@ -1,5 +1,11 @@
-import { SignUp } from '../../../components';
+import { SignUp } from '../../../components'
 
-export default function SignUpPage() {
-  return <SignUp />;
+interface Props {
+  searchParams: {
+    error?: string
+  }
+}
+
+export default function SignUpPage({ searchParams }: Props) {
+  return <SignUp error={searchParams.error} />
 }
