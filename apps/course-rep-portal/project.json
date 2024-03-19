@@ -1,8 +1,0 @@
-{
-  "name": "course-rep-portal",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/course-rep-portal/src",
-  "projectType": "application",
-  "targets": {},
-  "tags": []
-}
