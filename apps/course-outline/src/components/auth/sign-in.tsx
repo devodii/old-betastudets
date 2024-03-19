@@ -13,6 +13,8 @@ interface Props {
 export const SignIn = ({ error }: Props) => {
   const { push } = useRouter()
 
+  console.log('rendered', error)
+
   return (
     <Wrapper>
       <h2 className="font-semibold text-2xl md:text-3xl">Sign in</h2>

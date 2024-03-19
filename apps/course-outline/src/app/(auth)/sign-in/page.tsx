@@ -1,5 +1,11 @@
-import { SignIn } from '../../../components';
+import { SignIn } from '../../../components'
 
-export default function SignInPage() {
-  return <SignIn />;
+interface Props {
+  searchParams: {
+    error?: string
+  }
+}
+
+export default function SignInPage({ searchParams }: Props) {
+  return <SignIn error={searchParams.error} />
 }
